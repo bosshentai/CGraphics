@@ -42,8 +42,8 @@
      <Compile Include="Library/PackageCache/com.unity.collab-proxy@1.17.6/Editor/Collaborate/Components/Menus/FloatingMenuItem.cs" />
      <Compile Include="Library/PackageCache/com.unity.collab-proxy@1.17.6/Editor/Collaborate/Views/Adapters/IAdapter.cs" />
      <Compile Include="Library/PackageCache/com.unity.collab-proxy@1.17.6/Editor/Collaborate/EditorGameService/SettingsProviderVisuals/LearnMoreVisualHelper.cs" />
-     <Compile Include="Library/PackageCache/com.unity.collab-proxy@1.17.6/Editor/Collaborate/Components/IconButton.cs" />
      <Compile Include="Library/PackageCache/com.unity.collab-proxy@1.17.6/Editor/Collaborate/Components/SearchBar.cs" />
+     <Compile Include="Library/PackageCache/com.unity.collab-proxy@1.17.6/Editor/Collaborate/Components/IconButton.cs" />
      <Compile Include="Library/PackageCache/com.unity.collab-proxy@1.17.6/Editor/Collaborate/EditorGameService/SettingsProviderVisuals/EnabledVisuals.cs" />
      <Compile Include="Library/PackageCache/com.unity.collab-proxy@1.17.6/Editor/Collaborate/Utilities/Threading.cs" />
      <Compile Include="Library/PackageCache/com.unity.collab-proxy@1.17.6/Editor/Collaborate/Views/MainPageView.cs" />
@@ -417,11 +417,14 @@
     <Reference Include="Unity.Plastic.Antlr3.Runtime">
         <HintPath>/home/bosshentai/Documents/GitHub/CGraphics/unity/Laboratorio/Library/PackageCache/com.unity.collab-proxy@1.17.6/Lib/Editor/PlasticSCM/Unity.Plastic.Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="unityplastic">
+        <HintPath>/home/bosshentai/Documents/GitHub/CGraphics/unity/Laboratorio/Library/PackageCache/com.unity.collab-proxy@1.17.6/Lib/Editor/PlasticSCM/unityplastic.dll</HintPath>
+    </Reference>
     <Reference Include="log4netPlastic">
         <HintPath>/home/bosshentai/Documents/GitHub/CGraphics/unity/Laboratorio/Library/PackageCache/com.unity.collab-proxy@1.17.6/Lib/Editor/PlasticSCM/log4netPlastic.dll</HintPath>
     </Reference>
-    <Reference Include="unityplastic">
-        <HintPath>/home/bosshentai/Documents/GitHub/CGraphics/unity/Laboratorio/Library/PackageCache/com.unity.collab-proxy@1.17.6/Lib/Editor/PlasticSCM/unityplastic.dll</HintPath>
+    <Reference Include="ICSharpCode.NRefactory">
+        <HintPath>/home/bosshentai/Documents/GitHub/CGraphics/unity/Laboratorio/Library/PackageCache/com.unity.render-pipelines.core@10.10.1/Editor/ShaderGenerator/ICSharpCode.NRefactory.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
         <HintPath>/home/bosshentai/Documents/GitHub/CGraphics/unity/Laboratorio/Library/PackageCache/com.unity.ext.nunit@1.0.6/net35/unity-custom/nunit.framework.dll</HintPath>

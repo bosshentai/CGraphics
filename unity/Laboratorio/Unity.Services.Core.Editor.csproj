@@ -61,8 +61,8 @@
      <Compile Include="Library/PackageCache/com.unity.services.core@1.0.1/Editor/Core/AsyncOperation/AsyncOperationAwaiter.cs" />
      <Compile Include="Library/PackageCache/com.unity.services.core@1.0.1/Editor/Core/EditorGameService/EditorGameServiceFlagEnabler.cs" />
      <Compile Include="Library/PackageCache/com.unity.services.core@1.0.1/Editor/Core/UiHelpers/IProjectEditorDrawerFactory.cs" />
-     <Compile Include="Library/PackageCache/com.unity.services.core@1.0.1/Editor/Core/AsyncOperation/AsyncOperationStatus.cs" />
      <Compile Include="Library/PackageCache/com.unity.services.core@1.0.1/Editor/Core/EditorGameService/IEditorGameServiceEnabler.cs" />
+     <Compile Include="Library/PackageCache/com.unity.services.core@1.0.1/Editor/Core/AsyncOperation/AsyncOperationStatus.cs" />
      <Compile Include="Library/PackageCache/com.unity.services.core@1.0.1/Editor/Core/UiHelpers/VisualElementHelper.cs" />
      <Compile Include="Library/PackageCache/com.unity.services.core@1.0.1/Editor/Core/BackendHelpers/JsonHelper.cs" />
      <Compile Include="Library/PackageCache/com.unity.services.core@1.0.1/Editor/Core/ServiceActivationPopup/ServiceActivationPopupWindow.cs" />
@@ -98,8 +98,8 @@
      <Compile Include="Library/PackageCache/com.unity.services.core@1.0.1/Editor/Core/ServiceActivationPopup/IActivationPopupVisual.cs" />
      <Compile Include="Library/PackageCache/com.unity.services.core@1.0.1/Editor/Core/ServiceActivationPopup/Visuals/ServiceActivationConfirmationVisual.cs" />
      <Compile Include="Library/PackageCache/com.unity.services.core@1.0.1/Editor/Core/ServiceActivationPopup/Visuals/CoppaVisual.cs" />
-     <Compile Include="Library/PackageCache/com.unity.services.core@1.0.1/Editor/Core/Networking/HttpOptions.cs" />
      <Compile Include="Library/PackageCache/com.unity.services.core@1.0.1/Editor/Core/UiHelpers/PlatformSupportUiHelper.cs" />
+     <Compile Include="Library/PackageCache/com.unity.services.core@1.0.1/Editor/Core/Networking/HttpOptions.cs" />
      <Compile Include="Library/PackageCache/com.unity.services.core@1.0.1/Editor/Core/ServiceActivationPopup/Visuals/OfflineVisual.cs" />
      <Compile Include="Library/PackageCache/com.unity.services.core@1.0.1/Editor/Core/Networking/HttpRequest.cs" />
      <Compile Include="Library/PackageCache/com.unity.services.core@1.0.1/Editor/Core/AssemblyInfo.cs" />
@@ -363,11 +363,14 @@
     <Reference Include="Unity.Plastic.Antlr3.Runtime">
         <HintPath>/home/bosshentai/Documents/GitHub/CGraphics/unity/Laboratorio/Library/PackageCache/com.unity.collab-proxy@1.17.6/Lib/Editor/PlasticSCM/Unity.Plastic.Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="unityplastic">
+        <HintPath>/home/bosshentai/Documents/GitHub/CGraphics/unity/Laboratorio/Library/PackageCache/com.unity.collab-proxy@1.17.6/Lib/Editor/PlasticSCM/unityplastic.dll</HintPath>
+    </Reference>
     <Reference Include="log4netPlastic">
         <HintPath>/home/bosshentai/Documents/GitHub/CGraphics/unity/Laboratorio/Library/PackageCache/com.unity.collab-proxy@1.17.6/Lib/Editor/PlasticSCM/log4netPlastic.dll</HintPath>
     </Reference>
-    <Reference Include="unityplastic">
-        <HintPath>/home/bosshentai/Documents/GitHub/CGraphics/unity/Laboratorio/Library/PackageCache/com.unity.collab-proxy@1.17.6/Lib/Editor/PlasticSCM/unityplastic.dll</HintPath>
+    <Reference Include="ICSharpCode.NRefactory">
+        <HintPath>/home/bosshentai/Documents/GitHub/CGraphics/unity/Laboratorio/Library/PackageCache/com.unity.render-pipelines.core@10.10.1/Editor/ShaderGenerator/ICSharpCode.NRefactory.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
         <HintPath>/home/bosshentai/Documents/GitHub/CGraphics/unity/Laboratorio/Library/PackageCache/com.unity.ext.nunit@1.0.6/net35/unity-custom/nunit.framework.dll</HintPath>

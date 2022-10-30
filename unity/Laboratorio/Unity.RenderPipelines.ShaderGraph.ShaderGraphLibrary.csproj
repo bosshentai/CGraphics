@@ -282,11 +282,11 @@
     <Reference Include="Unity.Plastic.Antlr3.Runtime">
         <HintPath>/home/bosshentai/Documents/GitHub/CGraphics/unity/Laboratorio/Library/PackageCache/com.unity.collab-proxy@1.17.6/Lib/Editor/PlasticSCM/Unity.Plastic.Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="log4netPlastic">
-        <HintPath>/home/bosshentai/Documents/GitHub/CGraphics/unity/Laboratorio/Library/PackageCache/com.unity.collab-proxy@1.17.6/Lib/Editor/PlasticSCM/log4netPlastic.dll</HintPath>
-    </Reference>
     <Reference Include="unityplastic">
         <HintPath>/home/bosshentai/Documents/GitHub/CGraphics/unity/Laboratorio/Library/PackageCache/com.unity.collab-proxy@1.17.6/Lib/Editor/PlasticSCM/unityplastic.dll</HintPath>
+    </Reference>
+    <Reference Include="log4netPlastic">
+        <HintPath>/home/bosshentai/Documents/GitHub/CGraphics/unity/Laboratorio/Library/PackageCache/com.unity.collab-proxy@1.17.6/Lib/Editor/PlasticSCM/log4netPlastic.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.NRefactory">
         <HintPath>/home/bosshentai/Documents/GitHub/CGraphics/unity/Laboratorio/Library/PackageCache/com.unity.render-pipelines.core@10.10.1/Editor/ShaderGenerator/ICSharpCode.NRefactory.dll</HintPath>
