@@ -7,6 +7,9 @@
 // #include "cores.h"
 #include "primitive.h"
 
+// teste
+#include "VertexBuffer.h"
+
 static float angulo = 0.0;
 
 // Display List
