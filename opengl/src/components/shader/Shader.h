@@ -25,12 +25,27 @@ public:
 
   void validade();
 
+  std::string readFile(const char *fileLocation);
+
+  GLuint getProjectionLocation();
+  GLuint getModelLocation();
+  GLuint getAmbientIntensityLocation();
+  GLuint getAmbientColourLocation();
+  GLuint getDiffuseIntensityLocation();
+  GLuint getDirectionLocation();
+  GLuint getSpecularIntensityLocation();
+  GLuint getShininessLocation();
+  GLuint getEyePositionLocation();
+  GLuint getOmniLightPosLocation();
+  GLuint getFarPlaneLocation();
+
+  // void setDiretionalLight(DirectionalLight *dLight);
+
 
   void useShader();
   void clearShader();
 
   ~Shader();
-
 
 private:
   int pointLightCount;

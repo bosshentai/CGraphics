@@ -14,7 +14,7 @@ Shader::Shader()
     compileShader(vertexCode, fragmentCode);
   }
 
-  void Shader::compileShader(const char *vertexCode, const char *fragmentCode)
+  void Shader::compileShader(const char *vertexCode,const char *fragmentCode)
   {
     shaderID = glCreateProgram();
 
@@ -23,6 +23,10 @@ Shader::Shader()
       return;
     }
 
+  addShader(shaderID,vertexCode,GL_VERTEX_SHADER);
+  addShader(shaderID,fragmentCode,GL_FRAGMENT_SHADER);
+
+  compileProgram();
 
   }
 
