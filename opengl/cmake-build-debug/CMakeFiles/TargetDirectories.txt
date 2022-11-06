@@ -1,0 +1,3 @@
+/home/bosshentai/Documents/GitHub/CGraphics/opengl/cmake-build-debug/CMakeFiles/opengl.dir
+/home/bosshentai/Documents/GitHub/CGraphics/opengl/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/bosshentai/Documents/GitHub/CGraphics/opengl/cmake-build-debug/CMakeFiles/rebuild_cache.dir
