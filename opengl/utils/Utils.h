@@ -10,6 +10,7 @@
 #include <string>
 
 class Utils {
+public:
     static float degreesToRadians(int deg) {return deg * (M_PI / 180.0f);}
     static std::string ReadFile(const char *path);
 

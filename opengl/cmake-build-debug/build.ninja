@@ -73,6 +73,72 @@ build CMakeFiles/opengl.dir/texture/Texture.cpp.o: CXX_COMPILER__opengl_Debug /h
   OBJECT_DIR = CMakeFiles/opengl.dir
   OBJECT_FILE_DIR = CMakeFiles/opengl.dir/texture
 
+build CMakeFiles/opengl.dir/camera/Camera.cpp.o: CXX_COMPILER__opengl_Debug /home/bosshentai/Documents/GitHub/CGraphics/opengl/camera/Camera.cpp || cmake_object_order_depends_target_opengl
+  DEP_FILE = CMakeFiles/opengl.dir/camera/Camera.cpp.o.d
+  FLAGS = -g -std=gnu++20
+  OBJECT_DIR = CMakeFiles/opengl.dir
+  OBJECT_FILE_DIR = CMakeFiles/opengl.dir/camera
+
+build CMakeFiles/opengl.dir/model/Model.cpp.o: CXX_COMPILER__opengl_Debug /home/bosshentai/Documents/GitHub/CGraphics/opengl/model/Model.cpp || cmake_object_order_depends_target_opengl
+  DEP_FILE = CMakeFiles/opengl.dir/model/Model.cpp.o.d
+  FLAGS = -g -std=gnu++20
+  OBJECT_DIR = CMakeFiles/opengl.dir
+  OBJECT_FILE_DIR = CMakeFiles/opengl.dir/model
+
+build CMakeFiles/opengl.dir/mesh/Mesh.cpp.o: CXX_COMPILER__opengl_Debug /home/bosshentai/Documents/GitHub/CGraphics/opengl/mesh/Mesh.cpp || cmake_object_order_depends_target_opengl
+  DEP_FILE = CMakeFiles/opengl.dir/mesh/Mesh.cpp.o.d
+  FLAGS = -g -std=gnu++20
+  OBJECT_DIR = CMakeFiles/opengl.dir
+  OBJECT_FILE_DIR = CMakeFiles/opengl.dir/mesh
+
+build CMakeFiles/opengl.dir/light/DirectionalLight.cpp.o: CXX_COMPILER__opengl_Debug /home/bosshentai/Documents/GitHub/CGraphics/opengl/light/DirectionalLight.cpp || cmake_object_order_depends_target_opengl
+  DEP_FILE = CMakeFiles/opengl.dir/light/DirectionalLight.cpp.o.d
+  FLAGS = -g -std=gnu++20
+  OBJECT_DIR = CMakeFiles/opengl.dir
+  OBJECT_FILE_DIR = CMakeFiles/opengl.dir/light
+
+build CMakeFiles/opengl.dir/shadow/ShadowMap.cpp.o: CXX_COMPILER__opengl_Debug /home/bosshentai/Documents/GitHub/CGraphics/opengl/shadow/ShadowMap.cpp || cmake_object_order_depends_target_opengl
+  DEP_FILE = CMakeFiles/opengl.dir/shadow/ShadowMap.cpp.o.d
+  FLAGS = -g -std=gnu++20
+  OBJECT_DIR = CMakeFiles/opengl.dir
+  OBJECT_FILE_DIR = CMakeFiles/opengl.dir/shadow
+
+build CMakeFiles/opengl.dir/light/Light.cpp.o: CXX_COMPILER__opengl_Debug /home/bosshentai/Documents/GitHub/CGraphics/opengl/light/Light.cpp || cmake_object_order_depends_target_opengl
+  DEP_FILE = CMakeFiles/opengl.dir/light/Light.cpp.o.d
+  FLAGS = -g -std=gnu++20
+  OBJECT_DIR = CMakeFiles/opengl.dir
+  OBJECT_FILE_DIR = CMakeFiles/opengl.dir/light
+
+build CMakeFiles/opengl.dir/shadow/OmniShadowMap.cpp.o: CXX_COMPILER__opengl_Debug /home/bosshentai/Documents/GitHub/CGraphics/opengl/shadow/OmniShadowMap.cpp || cmake_object_order_depends_target_opengl
+  DEP_FILE = CMakeFiles/opengl.dir/shadow/OmniShadowMap.cpp.o.d
+  FLAGS = -g -std=gnu++20
+  OBJECT_DIR = CMakeFiles/opengl.dir
+  OBJECT_FILE_DIR = CMakeFiles/opengl.dir/shadow
+
+build CMakeFiles/opengl.dir/shader/Shader.cpp.o: CXX_COMPILER__opengl_Debug /home/bosshentai/Documents/GitHub/CGraphics/opengl/shader/Shader.cpp || cmake_object_order_depends_target_opengl
+  DEP_FILE = CMakeFiles/opengl.dir/shader/Shader.cpp.o.d
+  FLAGS = -g -std=gnu++20
+  OBJECT_DIR = CMakeFiles/opengl.dir
+  OBJECT_FILE_DIR = CMakeFiles/opengl.dir/shader
+
+build CMakeFiles/opengl.dir/light/SpotLight.cpp.o: CXX_COMPILER__opengl_Debug /home/bosshentai/Documents/GitHub/CGraphics/opengl/light/SpotLight.cpp || cmake_object_order_depends_target_opengl
+  DEP_FILE = CMakeFiles/opengl.dir/light/SpotLight.cpp.o.d
+  FLAGS = -g -std=gnu++20
+  OBJECT_DIR = CMakeFiles/opengl.dir
+  OBJECT_FILE_DIR = CMakeFiles/opengl.dir/light
+
+build CMakeFiles/opengl.dir/light/PointLight.cpp.o: CXX_COMPILER__opengl_Debug /home/bosshentai/Documents/GitHub/CGraphics/opengl/light/PointLight.cpp || cmake_object_order_depends_target_opengl
+  DEP_FILE = CMakeFiles/opengl.dir/light/PointLight.cpp.o.d
+  FLAGS = -g -std=gnu++20
+  OBJECT_DIR = CMakeFiles/opengl.dir
+  OBJECT_FILE_DIR = CMakeFiles/opengl.dir/light
+
+build CMakeFiles/opengl.dir/material/Material.cpp.o: CXX_COMPILER__opengl_Debug /home/bosshentai/Documents/GitHub/CGraphics/opengl/material/Material.cpp || cmake_object_order_depends_target_opengl
+  DEP_FILE = CMakeFiles/opengl.dir/material/Material.cpp.o.d
+  FLAGS = -g -std=gnu++20
+  OBJECT_DIR = CMakeFiles/opengl.dir
+  OBJECT_FILE_DIR = CMakeFiles/opengl.dir/material
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target opengl
@@ -81,9 +147,9 @@ build CMakeFiles/opengl.dir/texture/Texture.cpp.o: CXX_COMPILER__opengl_Debug /h
 #############################################
 # Link the executable opengl
 
-build opengl: CXX_EXECUTABLE_LINKER__opengl_Debug CMakeFiles/opengl.dir/main.cpp.o CMakeFiles/opengl.dir/utils/pch.cpp.o CMakeFiles/opengl.dir/window/Window.cpp.o CMakeFiles/opengl.dir/texture/Texture.cpp.o
+build opengl: CXX_EXECUTABLE_LINKER__opengl_Debug CMakeFiles/opengl.dir/main.cpp.o CMakeFiles/opengl.dir/utils/pch.cpp.o CMakeFiles/opengl.dir/window/Window.cpp.o CMakeFiles/opengl.dir/texture/Texture.cpp.o CMakeFiles/opengl.dir/camera/Camera.cpp.o CMakeFiles/opengl.dir/model/Model.cpp.o CMakeFiles/opengl.dir/mesh/Mesh.cpp.o CMakeFiles/opengl.dir/light/DirectionalLight.cpp.o CMakeFiles/opengl.dir/shadow/ShadowMap.cpp.o CMakeFiles/opengl.dir/light/Light.cpp.o CMakeFiles/opengl.dir/shadow/OmniShadowMap.cpp.o CMakeFiles/opengl.dir/shader/Shader.cpp.o CMakeFiles/opengl.dir/light/SpotLight.cpp.o CMakeFiles/opengl.dir/light/PointLight.cpp.o CMakeFiles/opengl.dir/material/Material.cpp.o
   FLAGS = -g
-  LINK_LIBRARIES = -lglut  -lglfw  -lGLEW  -lGL  -IGLU
+  LINK_LIBRARIES = -Wall  -lGL  -lGLU  -lglut  -lGLEW  -lglfw  -lX11  -lXxf86vm  -lXrandr  -lpthread  -lXi  -ldl  -lXinerama  -lXcursor  -lassimp
   OBJECT_DIR = CMakeFiles/opengl.dir
   POST_BUILD = :
   PRE_LINK = :
