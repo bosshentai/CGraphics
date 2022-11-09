@@ -284,7 +284,7 @@ void RenderPass(glm::mat4 projectionMatrix, glm::mat4 viewMatrix)
 
 int main(void)
 {
-    mainWindow = Window(1024,768);
+    mainWindow = Window(1024,800);
     mainWindow.Initialise();
 
     CreateObjects();
@@ -316,7 +316,7 @@ int main(void)
         camera.keyControl(mainWindow.getkeys(), deltaTime);
         camera.mouseControl(mainWindow.getDeltaMouseX(), mainWindow.getDeltaMouseY());
 
-        brickTexture = Texture("../assets/Texture/plain.png");
+        brickTexture = Texture("../assets/Texture/teste3.png");
         brickTexture.LoadTextureA();
 /*
 		if (mainWindow.getkeys()[GLFW_KEY_E])
