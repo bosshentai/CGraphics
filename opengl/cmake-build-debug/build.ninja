@@ -139,6 +139,12 @@ build CMakeFiles/opengl.dir/material/Material.cpp.o: CXX_COMPILER__opengl_Debug 
   OBJECT_DIR = CMakeFiles/opengl.dir
   OBJECT_FILE_DIR = CMakeFiles/opengl.dir/material
 
+build CMakeFiles/opengl.dir/skybox/SkyBox.cpp.o: CXX_COMPILER__opengl_Debug /home/bosshentai/Documents/GitHub/CGraphics/opengl/skybox/SkyBox.cpp || cmake_object_order_depends_target_opengl
+  DEP_FILE = CMakeFiles/opengl.dir/skybox/SkyBox.cpp.o.d
+  FLAGS = -g -std=gnu++20
+  OBJECT_DIR = CMakeFiles/opengl.dir
+  OBJECT_FILE_DIR = CMakeFiles/opengl.dir/skybox
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target opengl
@@ -147,7 +153,7 @@ build CMakeFiles/opengl.dir/material/Material.cpp.o: CXX_COMPILER__opengl_Debug 
 #############################################
 # Link the executable opengl
 
-build opengl: CXX_EXECUTABLE_LINKER__opengl_Debug CMakeFiles/opengl.dir/main.cpp.o CMakeFiles/opengl.dir/utils/pch.cpp.o CMakeFiles/opengl.dir/window/Window.cpp.o CMakeFiles/opengl.dir/texture/Texture.cpp.o CMakeFiles/opengl.dir/camera/Camera.cpp.o CMakeFiles/opengl.dir/model/Model.cpp.o CMakeFiles/opengl.dir/mesh/Mesh.cpp.o CMakeFiles/opengl.dir/light/DirectionalLight.cpp.o CMakeFiles/opengl.dir/shadow/ShadowMap.cpp.o CMakeFiles/opengl.dir/light/Light.cpp.o CMakeFiles/opengl.dir/shadow/OmniShadowMap.cpp.o CMakeFiles/opengl.dir/shader/Shader.cpp.o CMakeFiles/opengl.dir/light/SpotLight.cpp.o CMakeFiles/opengl.dir/light/PointLight.cpp.o CMakeFiles/opengl.dir/material/Material.cpp.o
+build opengl: CXX_EXECUTABLE_LINKER__opengl_Debug CMakeFiles/opengl.dir/main.cpp.o CMakeFiles/opengl.dir/utils/pch.cpp.o CMakeFiles/opengl.dir/window/Window.cpp.o CMakeFiles/opengl.dir/texture/Texture.cpp.o CMakeFiles/opengl.dir/camera/Camera.cpp.o CMakeFiles/opengl.dir/model/Model.cpp.o CMakeFiles/opengl.dir/mesh/Mesh.cpp.o CMakeFiles/opengl.dir/light/DirectionalLight.cpp.o CMakeFiles/opengl.dir/shadow/ShadowMap.cpp.o CMakeFiles/opengl.dir/light/Light.cpp.o CMakeFiles/opengl.dir/shadow/OmniShadowMap.cpp.o CMakeFiles/opengl.dir/shader/Shader.cpp.o CMakeFiles/opengl.dir/light/SpotLight.cpp.o CMakeFiles/opengl.dir/light/PointLight.cpp.o CMakeFiles/opengl.dir/material/Material.cpp.o CMakeFiles/opengl.dir/skybox/SkyBox.cpp.o
   FLAGS = -g
   LINK_LIBRARIES = -Wall  -lGL  -lGLU  -lglut  -lGLEW  -lglfw  -lX11  -lXxf86vm  -lXrandr  -lpthread  -lXi  -ldl  -lXinerama  -lXcursor  -lassimp
   OBJECT_DIR = CMakeFiles/opengl.dir

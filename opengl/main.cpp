@@ -26,7 +26,7 @@
 #include "./material/Material.h"
 #include "./model/Model.h"
 
-
+#include "./skybox/SkyBox.h"
 
 const float toRadians = 3.14159265f / 180.0f;
 
@@ -35,7 +35,7 @@ GLuint uniformProjection = 0, uniformModel = 0, uniformView = 0, uniformEyePosit
         uniformDirectionalLightTransform = 0, uniformOmniLightPos = 0, uniformFarPlane = 0;
 
 Window mainWindow;
-std::vector<Mesh*> meshList;
+std::vector<Mesh *> meshList;
 std::vector<Shader> shaderList;
 Shader directionalShadowShader;
 Shader omniShadowShader;
@@ -51,9 +51,13 @@ Material shinyMaterial;
 //Material dullMaterial;
 
 
+
+
 DirectionalLight mainLight;
 PointLight pointLights[MAX_POINT_LIGHTS];
 SpotLight spotLights[MAX_SPOT_LIGHTS];
+
+SkyBox skyBox;
 
 unsigned int pointLightCount = 0;
 unsigned int spotLightCount = 0;
@@ -62,27 +66,30 @@ GLfloat deltaTime = 0.0f;
 GLfloat lastTime = 0.0f;
 
 // Vertex shader
-static const char* vShader = "../assets/shader/shader.vert";
+static const char *vShader = "../assets/shader/shader.vert";
 
 // Fragment shader
-static const char* fShader = "../assets/shader/shader.frag";
+static const char *fShader = "../assets/shader/shader.frag";
 
 //// Vertex directional Shadow map
-//static const char* vDirecShadowMap = "./assets/directional_shadow_map.vert";
+static const char *vDirecShadowMap = "../assets/shader/directional_shadow_map.vert";
 //
 //// Fragment directional Shadow map
-//static const char* fDirectShadowMap = "./assets/directional_shadow_map.frag";
+static const char *fDirectShadowMap = "../assets/shader/directional_shadow_map.frag";
 //
 //// Vertex omni Shadow map
-//static const char* vOmniShadowMap = "./assets/omni_shadow_map.vert";
+static const char *vOmniShadowMap = "../assets/shader/omni_shadow_map.vert";
 //
 //// Geometrix omni Shadow map
-//static const char* gOmniShadowMap = "./assets/omni_shadow_map.geom";
+static const char *gOmniShadowMap = "../assets/shader/omni_shadow_map.geom";
 //
 //// Fragment omni Shadow map
-//static const char* fOmniShadowMap = "./assets/omni_shadow_map.frag";
+static const char *fOmniShadowMap = "../assets/shader/omni_shadow_map.frag";
 
-void CreateObjects(){
+
+static const char *skyBoxBottom = "../assets/Texture/SkyBox/skyrender0006.tga";
+
+void CreateObjects() {
     unsigned int indices[] = {
             0, 3, 1,
             1, 3, 2,
@@ -92,10 +99,10 @@ void CreateObjects(){
 
     GLfloat vertices[] = {
             //	x      y      z			u	  v			nx	  ny    nz
-            -1.0f, -1.0f, -0.6f,		0.0f, 0.0f,		0.0f, 0.0f, 0.0f,
-            0.0f, -1.0f, 1.0f,		0.5f, 0.0f,		0.0f, 0.0f, 0.0f,
-            1.0f, -1.0f, -0.6f,		1.0f, 0.0f,		0.0f, 0.0f, 0.0f,
-            0.0f, 1.0f, 0.0f,		0.5f, 1.0f,		0.0f, 0.0f, 0.0f
+            -1.0f, -1.0f, -0.6f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,
+            0.0f, -1.0f, 1.0f, 0.5f, 0.0f, 0.0f, 0.0f, 0.0f,
+            1.0f, -1.0f, -0.6f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f,
+            0.0f, 1.0f, 0.0f, 0.5f, 1.0f, 0.0f, 0.0f, 0.0f
     };
 
     unsigned int floorIndices[] = {
@@ -104,10 +111,10 @@ void CreateObjects(){
     };
 
     GLfloat floorVertices[] = {
-            -10.0f, 0.0f, -10.0f,	0.0f, 0.0f,		0.0f, -1.0f, 0.0f,
-            10.0f, 0.0f, -10.0f,	10.0f, 0.0f,	0.0f, -1.0f, 0.0f,
-            -10.0f, 0.0f, 10.0f,	0.0f, 10.0f,	0.0f, -1.0f, 0.0f,
-            10.0f, 0.0f, 10.0f,		10.0f, 10.0f,	0.0f, -1.0f, 0.0f
+            -10.0f, 0.0f, -10.0f, 0.0f, 0.0f, 0.0f, -1.0f, 0.0f,
+            10.0f, 0.0f, -10.0f, 10.0f, 0.0f, 0.0f, -1.0f, 0.0f,
+            -10.0f, 0.0f, 10.0f, 0.0f, 10.0f, 0.0f, -1.0f, 0.0f,
+            10.0f, 0.0f, 10.0f, 10.0f, 10.0f, 0.0f, -1.0f, 0.0f
     };
 
 
@@ -124,7 +131,7 @@ void CreateObjects(){
     meshList.push_back(obj3);
 }
 
-void AddLights(){
+void AddLights() {
     mainLight = DirectionalLight(2048, 2048,
                                  1.0f, 0.53f, 0.3f,
                                  0.1f, 0.9f,
@@ -166,33 +173,49 @@ void AddLights(){
     spotLightCount++;
 }
 
+void DrawSky(){
+    std::vector<std::string> skyFaces;
 
-void CreateShader(){
-    Shader* shader1 = new Shader();
+    skyFaces.push_back("../assets/Texture/SkyBox/skyrender0001.tga");
+    skyFaces.push_back("../assets/Texture/SkyBox/skyrender0002.tga");
+    skyFaces.push_back("../assets/Texture/SkyBox/skyrender0003.tga");
+    skyFaces.push_back("../assets/Texture/SkyBox/skyrender0004.tga");
+    skyFaces.push_back("../assets/Texture/SkyBox/skyrender0005.tga");
+    skyFaces.push_back("../assets/Texture/SkyBox/skyrender0006.tga");
+
+    skyBox = SkyBox(skyFaces);
+
+    printf("Skybox");
+}
+
+
+void CreateShader() {
+    Shader *shader1 = new Shader();
     shader1->createFromFiles(vShader, fShader);
     shaderList.push_back(*shader1);
 
     directionalShadowShader = Shader();
-    directionalShadowShader.createFromFiles("../assets/shader/directional_shadow_map.vert","../assets/shader/directional_shadow_map.frag");
+    directionalShadowShader.createFromFiles(vDirecShadowMap,
+                                            fDirectShadowMap);
 
     omniShadowShader = Shader();
-    omniShadowShader.createFromFiles("../assets/shader/omni_shadow_map.vert","../assets/shader/omni_shadow_map.geom","../assets/shader/omni_shadow_map.frag");
+    omniShadowShader.createFromFiles(vOmniShadowMap, gOmniShadowMap,
+                                     fOmniShadowMap);
 }
 
-void RenderScene(){
+void RenderScene() {
     glm::mat4 model(1.0f);
 
     //triangle
-    model = glm::translate(model, glm::vec3(0.0f, 0.0f, -2.5f));
+//    model = glm::translate(model, glm::vec3(0.0f, 0.0f, -2.5f));
     //model = glm::scale(model, glm::vec3(0.4f, 0.4f, 1.0f));
     glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-    brickTexture.useTexture();
-    shinyMaterial.UseMaterial(uniformSpecularIntensity, uniformShininess);
-    meshList[0]->renderMesh();
+//    brickTexture.useTexture();
+//    shinyMaterial.UseMaterial(uniformSpecularIntensity, uniformShininess);
+//    meshList[0]->renderMesh();
 }
 
-void DirectionalShadowMapPass(DirectionalLight* light)
-{
+void DirectionalShadowMapPass(DirectionalLight *light) {
     directionalShadowShader.useShader();
 
     glViewport(0, 0, light->getShadowMap()->GetShadowWidth(), light->getShadowMap()->GetShadowHeight());
@@ -214,8 +237,7 @@ void DirectionalShadowMapPass(DirectionalLight* light)
 }
 
 
-void OmniShadowMapPass(PointLight* light)
-{
+void OmniShadowMapPass(PointLight *light) {
     omniShadowShader.useShader();
 
     glViewport(0, 0, light->getShadowMap()->GetShadowWidth(), light->getShadowMap()->GetShadowHeight());
@@ -239,15 +261,14 @@ void OmniShadowMapPass(PointLight* light)
 }
 
 
-void RenderPass(glm::mat4 projectionMatrix, glm::mat4 viewMatrix)
-{
+void RenderPass(glm::mat4 projectionMatrix, glm::mat4 viewMatrix) {
     glViewport(0, 0, 1920, 1080);
 
     // clear window
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-//    skybox.DrawSkybox(viewMatrix, projectionMatrix);
+    skyBox.DrawSkyBox(viewMatrix, projectionMatrix);
 
     shaderList[0].useShader();
 
@@ -260,7 +281,8 @@ void RenderPass(glm::mat4 projectionMatrix, glm::mat4 viewMatrix)
 
     glUniformMatrix4fv(uniformProjection, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
     glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(viewMatrix));
-    glUniform3f(uniformEyePosition, camera.getCameraPosition().x, camera.getCameraPosition().y, camera.getCameraPosition().z);
+    glUniform3f(uniformEyePosition, camera.getCameraPosition().x, camera.getCameraPosition().y,
+                camera.getCameraPosition().z);
 
     glm::mat4 lightTransform = mainLight.CalculateLightTransform();
 
@@ -282,9 +304,8 @@ void RenderPass(glm::mat4 projectionMatrix, glm::mat4 viewMatrix)
     RenderScene();
 }
 
-int main(void)
-{
-    mainWindow = Window(1024,800);
+int main(void) {
+    mainWindow = Window(1024, 800);
     mainWindow.Initialise();
 
     CreateObjects();
@@ -296,17 +317,44 @@ int main(void)
 
 
 
+
+
+
+
     AddLights();
+
+
+
+    std::vector<std::string> skyFaces;
+
+    // left
+    // right
+    // top
+    // bottom
+    // back
+    // front
+    skyFaces.push_back("../assets/Texture/SkyBox/skyrender0001.tga");
+    skyFaces.push_back("../assets/Texture/SkyBox/skyrender0002.tga");
+    skyFaces.push_back("../assets/Texture/SkyBox/skyrender0003.tga");
+    skyFaces.push_back(skyBoxBottom);
+    skyFaces.push_back("../assets/Texture/SkyBox/skyrender0004.tga");
+    skyFaces.push_back("../assets/Texture/SkyBox/skyrender0005.tga");
+
+    skyBox = SkyBox(skyFaces);
+
+
+//    DrawSky();
 
     GLuint uniformProjection = 0, uniformModel = 0, uniformView = 0, uniformEyePosition = 0,
             uniformSpecularIntensity = 0, uniformShininess = 0;
-    glm::mat4 projection = glm::perspective(glm::radians(60.0f),(float) mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.1f, 100.f);
+    glm::mat4 projection = glm::perspective(glm::radians(60.0f),
+                                            (float) mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.1f,
+                                            100.f);
 
 
 
     /* Loop until the user closes the window */
-    while (!mainWindow.getShouldClose())
-    {
+    while (!mainWindow.getShouldClose()) {
         GLfloat now = glfwGetTime();
         deltaTime = now - lastTime;
         lastTime = now;
@@ -326,12 +374,10 @@ int main(void)
 		}
 */
         DirectionalShadowMapPass(&mainLight);
-        for (size_t i = 0; i < pointLightCount; i++)
-        {
+        for (size_t i = 0; i < pointLightCount; i++) {
             OmniShadowMapPass(&pointLights[i]);
         }
-        for (size_t i = 0; i < spotLightCount; i++)
-        {
+        for (size_t i = 0; i < spotLightCount; i++) {
             OmniShadowMapPass(&spotLights[i]);
         }
         RenderPass(projection, camera.calculateViewMatrix());
