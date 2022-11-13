@@ -69,9 +69,11 @@ int Window::Initialise()
     // Set contexto atual
     glfwMakeContextCurrent(mainWindow);
 
+//    glfwSetInputMode(mainWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 
     // manipular teclas do teclado + input do rato
     createCallbacks();
+
 
 
     //permitir recursos de exções modernas

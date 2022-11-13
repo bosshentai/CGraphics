@@ -40,7 +40,6 @@ void Model::loadModel(const std::string& fileName)
     }
 
     loadNode(scene->mRootNode, scene);
-
     LoadMaterials(scene);
 }
 
@@ -96,13 +95,15 @@ void Model::LoadMaterials(const aiScene* scene)
 {
     textureList.resize(scene->mNumMaterials);
 
+//    printf("LoadMaterials");
+
     for (size_t i = 0; i < scene->mNumMaterials; i++)
     {
         aiMaterial* material = scene->mMaterials[i];
 
         textureList[i] = nullptr;
 
-        if (material->GetTextureCount(aiTextureType_DIFFUSE))
+        if (material->GetTextureCount(aiTextureType_DIFFUSE) > 0)
         {
             aiString path;
             if (material->GetTexture(aiTextureType_DIFFUSE, 0, &path) == AI_SUCCESS)
@@ -110,13 +111,19 @@ void Model::LoadMaterials(const aiScene* scene)
                 int idx = std::string(path.data).rfind("\\");
                 std::string filename = std::string(path.data).substr(idx + 1);
 
-                std::string texPath = std::string("Textures/") + filename;
+                printf("patch data : %s" ,path.C_Str());
+//std::string filename
+
+                std::string texPath = std::string("../assets/Texture/") + filename;
+                printf("file name :  %s" , filename.c_str());
+
 
                 textureList[i] = new Texture(texPath.c_str());
 
-                if (!textureList[i]->loadTexture())
+                if (textureList[i] != nullptr && !textureList[i]->loadTexture())
                 {
                     printf("Failed to load texture at: %s\n", texPath.c_str());
+
                     delete textureList[i];
                     textureList[i] = nullptr;
                 }
@@ -125,8 +132,8 @@ void Model::LoadMaterials(const aiScene* scene)
 
         if (!textureList[i])
         {
-            textureList[i] = new Texture("Textures/plain.png");
-            textureList[i]->LoadTextureA();
+            textureList[i] = new Texture("../assets/Texture/plain.png");
+            textureList[i]->loadTexture();
         }
     }
 }

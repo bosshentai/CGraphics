@@ -6,6 +6,7 @@
 #include <GLFW/glfw3.h>
 
 #define STB_IMAGE_IMPLEMENTATION
+//#define STBI_FAILURE
 //#include "stbImage/stb_image.h"
 #include "./texture/Texture.h"
 
@@ -46,11 +47,12 @@ Texture brickTexture;
 //Texture dirtTexture;
 //Texture plainTexture;
 //Texture testeTexture;
+Texture terraTexture;
 
 Material shinyMaterial;
 //Material dullMaterial;
 
-
+Model terra;
 
 
 DirectionalLight mainLight;
@@ -88,6 +90,11 @@ static const char *fOmniShadowMap = "../assets/shader/omni_shadow_map.frag";
 
 
 static const char *skyBoxBottom = "../assets/Texture/SkyBox/skyrender0006.tga";
+static const char *skyBoxTop = "../assets/Texture/SkyBox/skyrender0005.tga";
+static const char *skyBoxFront = "../assets/Texture/SkyBox/skyrender0004.tga";
+static const char *skyBoxLeft = "../assets/Texture/SkyBox/skyrender0003.tga";
+static const char *skyBoxRight = "../assets/Texture/SkyBox/skyrender0001.tga";
+static const char *skyBoxBack = "../assets/Texture/SkyBox/skyrender0002.tga";
 
 void CreateObjects() {
     unsigned int indices[] = {
@@ -118,74 +125,64 @@ void CreateObjects() {
     };
 
 
-    Mesh *obj1 = new Mesh();
-    obj1->createMesh(vertices, indices, 32, 12);
-    meshList.push_back(obj1);
-
-    Mesh *obj2 = new Mesh();
-    obj2->createMesh(vertices, indices, 32, 12);
-    meshList.push_back(obj2);
-
-    Mesh *obj3 = new Mesh();
-    obj3->createMesh(floorVertices, floorIndices, 32, 6);
-    meshList.push_back(obj3);
+//    Mesh *obj1 = new Mesh();
+//    obj1->createMesh(vertices, indices, 32, 12);
+//    meshList.push_back(obj1);
+////
+//    Mesh *obj2 = new Mesh();
+//    obj2->createMesh(vertices, indices, 32, 12);
+//    meshList.push_back(obj2);
+////
+//    Mesh *obj3 = new Mesh();
+//    obj3->createMesh(floorVertices, floorIndices, 32, 6);
+//    meshList.push_back(obj3);
 }
 
 void AddLights() {
-    mainLight = DirectionalLight(2048, 2048,
-                                 1.0f, 0.53f, 0.3f,
-                                 0.1f, 0.9f,
-                                 -10.0f, -12.0f, 18.5f);
+    mainLight = DirectionalLight(2048, 2048,    //resolution
+                                 1.0f, 0.53f, 0.3f, //color
+                                 0.1f, 0.9f, //intensity 0.1 0.5
+                                 -10.0f, -12.0f, -18.5f); //location
 
-    pointLights[0] = PointLight(1024, 1024,
-                                0.01f, 100.0f,
-                                0.0f, 0.0f, 1.0f,
-                                0.0f, 1.0f,
-                                1.0f, 2.0f, 0.0f,
-                                0.3f, 0.2f, 0.1f);
-    pointLightCount++;
-    pointLights[1] = PointLight(1024, 1024,
-                                0.01f, 100.0f,
-                                0.0f, 1.0f, 0.0f,
-                                0.0f, 1.0f,
-                                -4.0f, 3.0f, 0.0f,
-                                0.3f, 0.2f, 0.1f);
+    pointLights[0] = PointLight(1024, 1024,       //width height needs to be square
+                                0.1f, 100.0f,     //near and far plane
+                                0.0f, 0.0f, 1.0f, //color
+                                0.4f, 0.4f,          // aIntensity dIntensity
+                                2.0f, 2.0f, 2.0f, // x y z coords
+                                0.3f, 0.1f, 0.1f);//con lin exp
     pointLightCount++;
 
-
-    spotLights[0] = SpotLight(1024, 1024,
-                              0.01f, 100.0f,
+    spotLights[0] = SpotLight(1024, 1024,     //width height needs to be square
+                              0.1f, 100.0f,   //near and far plane
                               1.0f, 1.0f, 1.0f,
-                              0.0f, 2.0f,
+                              0.0f, 2.0f, //brightness
                               0.0f, 0.0f, 0.0f,
                               0.0f, -1.0f, 0.0f,
-                              1.0f, 0.0f, 0.0f,
-                              20.0f);
+                              1.0f, 0.0f, 0.0f, //attenuation values
+                              20.0f); //angle of edge
     spotLightCount++;
-    spotLights[1] = SpotLight(1024, 1024,
-                              0.01f, 100.0f,
-                              1.0f, 1.0f, 1.0f,
-                              0.0f, 1.0f,
-                              0.0f, -1.5f, 0.0f,
-                              -100.0f, -1.0f, 0.0f,
-                              1.0f, 0.0f, 0.0f,
-                              20.0f);
-    spotLightCount++;
+
+
 }
 
-void DrawSky(){
+void DrawSky() {
     std::vector<std::string> skyFaces;
 
-    skyFaces.push_back("../assets/Texture/SkyBox/skyrender0001.tga");
-    skyFaces.push_back("../assets/Texture/SkyBox/skyrender0002.tga");
-    skyFaces.push_back("../assets/Texture/SkyBox/skyrender0003.tga");
-    skyFaces.push_back("../assets/Texture/SkyBox/skyrender0004.tga");
-    skyFaces.push_back("../assets/Texture/SkyBox/skyrender0005.tga");
-    skyFaces.push_back("../assets/Texture/SkyBox/skyrender0006.tga");
+    // left
+    // right
+    // top
+    // bottom
+    // back
+    // front
+    skyFaces.push_back(skyBoxLeft);
+    skyFaces.push_back(skyBoxRight);
+    skyFaces.push_back(skyBoxTop);
+    skyFaces.push_back(skyBoxBottom);
+    skyFaces.push_back(skyBoxBack);
+    skyFaces.push_back(skyBoxFront);
 
     skyBox = SkyBox(skyFaces);
 
-    printf("Skybox");
 }
 
 
@@ -204,15 +201,18 @@ void CreateShader() {
 }
 
 void RenderScene() {
-    glm::mat4 model(1.0f);
+//    glm::mat4 model = glm::mat4 (1.0f);
+//    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 
-    //triangle
-//    model = glm::translate(model, glm::vec3(0.0f, 0.0f, -2.5f));
-    //model = glm::scale(model, glm::vec3(0.4f, 0.4f, 1.0f));
-    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-//    brickTexture.useTexture();
-//    shinyMaterial.UseMaterial(uniformSpecularIntensity, uniformShininess);
-//    meshList[0]->renderMesh();
+    // terra
+//    model = glm::mat4(1.0);
+    glm::mat4 modelTerra = glm::mat4(1.0f);
+    modelTerra = glm::translate(modelTerra, glm::vec3(2.0f, -1.0f, -10.0f));
+    modelTerra = glm::scale(modelTerra, glm::vec3(1.0f, 1.0f, 1.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelTerra));
+    terraTexture.useTexture();
+//    shinyMaterial.UseMaterial(uniformSpecularIntensity,uniformShininess);
+    terra.renderModel();
 }
 
 void DirectionalShadowMapPass(DirectionalLight *light) {
@@ -262,6 +262,9 @@ void OmniShadowMapPass(PointLight *light) {
 
 
 void RenderPass(glm::mat4 projectionMatrix, glm::mat4 viewMatrix) {
+
+
+
     glViewport(0, 0, 1920, 1080);
 
     // clear window
@@ -295,8 +298,8 @@ void RenderPass(glm::mat4 projectionMatrix, glm::mat4 viewMatrix) {
     shaderList[0].setTexture(1);
     shaderList[0].setDirectionalShadowMap(2);
 
-    glm::vec3 lowerLight = camera.getCameraPosition();
-    lowerLight.y -= 0.0f;
+//    glm::vec3 lowerLight = camera.getCameraPosition();
+//    lowerLight.y -= 0.0f;
     /*spotLights[0].SetFlash(lowerLight, camera.getCameraDirection());*/
 
     shaderList[0].validate();
@@ -304,9 +307,14 @@ void RenderPass(glm::mat4 projectionMatrix, glm::mat4 viewMatrix) {
     RenderScene();
 }
 
-int main(void) {
-    mainWindow = Window(1024, 800);
+int main() {
+    mainWindow = Window(1424, 800);
     mainWindow.Initialise();
+
+//    glfwSetInputMode(mainWindow,GLFW_CURSOR,GLFW_CURSOR_HIDDEN);
+
+
+
 
     CreateObjects();
     CreateShader();
@@ -316,34 +324,19 @@ int main(void) {
                     -60.0f, 0.0f, 5.0f, 0.5f);
 
 
+    terra = Model();
+    terra.loadModel("../assets/Models/Terra/Earth2K.fbx");
+    terraTexture = Texture("../assets/Texture/Diffuse_2K.png");
+    terraTexture.LoadTextureA();
 
 
+//     terraTexture.LoadTextureA();
 
-
+    shinyMaterial = Material(10.0f, 256);
 
     AddLights();
 
-
-
-    std::vector<std::string> skyFaces;
-
-    // left
-    // right
-    // top
-    // bottom
-    // back
-    // front
-    skyFaces.push_back("../assets/Texture/SkyBox/skyrender0001.tga");
-    skyFaces.push_back("../assets/Texture/SkyBox/skyrender0002.tga");
-    skyFaces.push_back("../assets/Texture/SkyBox/skyrender0003.tga");
-    skyFaces.push_back(skyBoxBottom);
-    skyFaces.push_back("../assets/Texture/SkyBox/skyrender0004.tga");
-    skyFaces.push_back("../assets/Texture/SkyBox/skyrender0005.tga");
-
-    skyBox = SkyBox(skyFaces);
-
-
-//    DrawSky();
+    DrawSky();
 
     GLuint uniformProjection = 0, uniformModel = 0, uniformView = 0, uniformEyePosition = 0,
             uniformSpecularIntensity = 0, uniformShininess = 0;
@@ -364,8 +357,11 @@ int main(void) {
         camera.keyControl(mainWindow.getkeys(), deltaTime);
         camera.mouseControl(mainWindow.getDeltaMouseX(), mainWindow.getDeltaMouseY());
 
-        brickTexture = Texture("../assets/Texture/teste3.png");
-        brickTexture.LoadTextureA();
+
+        // TESTES
+
+//        brickTexture = Texture("../assets/Texture/teste3.png");
+//        brickTexture.LoadTextureA();
 /*
 		if (mainWindow.getkeys()[GLFW_KEY_E])
 		{
