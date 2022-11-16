@@ -1,0 +1,8 @@
+newmtl Monitor_1_on
+map_Kd Monitor_1.png
+map_Pm Monitor_1_Specular.png
+bump Monitor_1_Normal.png
+map_Ke Monitor_1_Emission.png
+Kd 1 1 1
+d 1
+
