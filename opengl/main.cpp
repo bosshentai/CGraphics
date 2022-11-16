@@ -47,13 +47,14 @@ Texture brickTexture;
 //Texture dirtTexture;
 //Texture plainTexture;
 //Texture testeTexture;
-Texture terraTexture;
+//Texture terraTexture;
+Texture monitorTexture;
 
 Material shinyMaterial;
-//Material dullMaterial;
+Material dullMaterial;
 
-Model terra;
-
+//Model terra;
+Model monitor;
 
 DirectionalLight mainLight;
 PointLight pointLights[MAX_POINT_LIGHTS];
@@ -201,18 +202,31 @@ void CreateShader() {
 }
 
 void RenderScene() {
+
+
 //    glm::mat4 model = glm::mat4 (1.0f);
 //    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 
     // terra
-//    model = glm::mat4(1.0);
-    glm::mat4 modelTerra = glm::mat4(1.0f);
-    modelTerra = glm::translate(modelTerra, glm::vec3(2.0f, -1.0f, -10.0f));
-    modelTerra = glm::scale(modelTerra, glm::vec3(1.0f, 1.0f, 1.0f));
-    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelTerra));
-    terraTexture.useTexture();
-//    shinyMaterial.UseMaterial(uniformSpecularIntensity,uniformShininess);
-    terra.renderModel();
+////    model = glm::mat4(1.0);
+//    glm::mat4 modelTerra = glm::mat4(1.0f);
+//    modelTerra = glm::translate(modelTerra, glm::vec3(2.0f, -1.0f, -10.0f));
+//    modelTerra = glm::scale(modelTerra, glm::vec3(1.0f, 1.0f, 1.0f));
+//    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelTerra));
+//    terraTexture.useTexture();
+////    shinyMaterial.UseMaterial(uniformSpecularIntensity,uniformShininess);
+//    terra.renderModel();
+
+    // monitor
+    glm::mat4 modelMonitor = glm::mat4(1.0f);
+    modelMonitor = glm::translate(modelMonitor,glm::vec3(2.0f,-1.0f,-10.0f));
+    modelMonitor = glm::rotate(modelMonitor,glm::radians(-90.0f),glm::vec3(1.0f,0.0f,0.0f));
+    modelMonitor = glm::scale(modelMonitor,glm:: vec3(1.0f,1.0f,1.0f));
+    glUniformMatrix4fv(uniformModel,1,GL_FALSE,glm::value_ptr(modelMonitor));
+    monitorTexture.useTexture();
+    dullMaterial.UseMaterial(uniformSpecularIntensity,uniformShininess);
+    monitor.renderModel();
+
 }
 
 void DirectionalShadowMapPass(DirectionalLight *light) {
@@ -265,6 +279,7 @@ void RenderPass(glm::mat4 projectionMatrix, glm::mat4 viewMatrix) {
 
 
 
+
     glViewport(0, 0, 1920, 1080);
 
     // clear window
@@ -273,14 +288,16 @@ void RenderPass(glm::mat4 projectionMatrix, glm::mat4 viewMatrix) {
 
     skyBox.DrawSkyBox(viewMatrix, projectionMatrix);
 
-    shaderList[0].useShader();
 
+    shaderList[0].useShader();
     uniformModel = shaderList[0].getModelLocation();
     uniformProjection = shaderList[0].getProjectionLocation();
     uniformView = shaderList[0].getViewLocation();
     uniformEyePosition = shaderList[0].getEyePositionLocation();
     uniformSpecularIntensity = shaderList[0].getSpecularIntensityLocation();
     uniformShininess = shaderList[0].getShininessLocation();
+
+
 
     glUniformMatrix4fv(uniformProjection, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
     glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(viewMatrix));
@@ -324,15 +341,23 @@ int main() {
                     -60.0f, 0.0f, 5.0f, 0.5f);
 
 
-    terra = Model();
-    terra.loadModel("../assets/Models/Terra/Earth2K.fbx");
-    terraTexture = Texture("../assets/Texture/Diffuse_2K.png");
-    terraTexture.LoadTextureA();
+//    terra = Model();
+//    terra.loadModel("../assets/Models/Terra/Earth2K.fbx");
+//    terraTexture = Texture("../assets/Texture/Diffuse_2K.png");
+//    terraTexture.LoadTextureA();
+
+
+        monitor = Model();
+        monitor.loadModel("../assets/Models/Monitor/Monitor_1.fbx");
+
+        monitorTexture = Texture((char*)"../assets/Texture/Monitor/Monitor_1_Emission.png");
+        monitorTexture.LoadTextureA();
 
 
 //     terraTexture.LoadTextureA();
 
     shinyMaterial = Material(10.0f, 256);
+    dullMaterial = Material(0.3f,1);
 
     AddLights();
 

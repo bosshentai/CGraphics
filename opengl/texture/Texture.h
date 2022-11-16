@@ -2,8 +2,7 @@
 // Created by bosshentai on 11/6/22.
 //
 #pragma once
-#ifndef OPENGL_TEXTURE_H
-#define OPENGL_TEXTURE_H
+
 
 #include <GL/glew.h>
 #include "../utils/CommonValues.h"
@@ -31,4 +30,3 @@ private:
 };
 
 
-#endif //OPENGL_TEXTURE_H
