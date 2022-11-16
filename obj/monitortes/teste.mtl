@@ -1,0 +1,6 @@
+newmtl Monitor_1_on
+Kd 1 1 1
+map_Kd C:\Users\LENOVO\Documents\GitHub\CGraphics\obj\monitortes\Monitor_1.png
+map_Bump C:\Users\LENOVO\Documents\GitHub\CGraphics\obj\monitortes\Monitor_1_Normal.png
+illum 2
+
