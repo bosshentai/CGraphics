@@ -47,14 +47,15 @@ Texture brickTexture;
 //Texture dirtTexture;
 //Texture plainTexture;
 //Texture testeTexture;
-//Texture terraTexture;
+Texture terraTexture;
 Texture monitorTexture;
 
 Material shinyMaterial;
 Material dullMaterial;
 
-//Model terra;
+Model terra;
 Model monitor;
+Model table;
 
 DirectionalLight mainLight;
 PointLight pointLights[MAX_POINT_LIGHTS];
@@ -207,25 +208,34 @@ void RenderScene() {
 //    glm::mat4 model = glm::mat4 (1.0f);
 //    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 
-    // terra
-////    model = glm::mat4(1.0);
+//     terra
+//    model = glm::mat4(1.0);
 //    glm::mat4 modelTerra = glm::mat4(1.0f);
 //    modelTerra = glm::translate(modelTerra, glm::vec3(2.0f, -1.0f, -10.0f));
 //    modelTerra = glm::scale(modelTerra, glm::vec3(1.0f, 1.0f, 1.0f));
 //    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelTerra));
 //    terraTexture.useTexture();
-////    shinyMaterial.UseMaterial(uniformSpecularIntensity,uniformShininess);
+//    shinyMaterial.UseMaterial(uniformSpecularIntensity,uniformShininess);
 //    terra.renderModel();
 
     // monitor
-    glm::mat4 modelMonitor = glm::mat4(1.0f);
-    modelMonitor = glm::translate(modelMonitor,glm::vec3(2.0f,-1.0f,-10.0f));
-    modelMonitor = glm::rotate(modelMonitor,glm::radians(-90.0f),glm::vec3(1.0f,0.0f,0.0f));
-    modelMonitor = glm::scale(modelMonitor,glm:: vec3(1.0f,1.0f,1.0f));
-    glUniformMatrix4fv(uniformModel,1,GL_FALSE,glm::value_ptr(modelMonitor));
-    monitorTexture.useTexture();
-    dullMaterial.UseMaterial(uniformSpecularIntensity,uniformShininess);
+    glm::mat4 modelMonitor = glm::mat4(1.0);
+    modelMonitor = glm::translate(modelMonitor, glm::vec3(5.0f, -1.0f, -1.0f));
+//    modelMonitor = glm::rotate(modelMonitor, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+    modelMonitor = glm::scale(modelMonitor, glm::vec3(1.0f, 1.0f, 1.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelMonitor));
+//    monitorTexture.useTexture();
+    dullMaterial.UseMaterial(uniformSpecularIntensity, uniformShininess);
     monitor.renderModel();
+
+//table
+    glm::mat4 modeltable = glm::mat4(1.0);
+    modeltable = glm::translate(modeltable,glm::vec3(2.0f,-1.0f,-3.0f));
+//    modeltable = glm::scale(modeltable,glm::vec3(.0f,100.0f,10.00f));
+    glUniformMatrix4fv(uniformModel,1,GL_FALSE,glm::value_ptr(modeltable));
+//    shinyMaterial.UseMaterial(uniformSpecularIntensity,uniformShininess);
+    dullMaterial.UseMaterial(uniformSpecularIntensity,uniformShininess);
+    table.renderModel();
 
 }
 
@@ -278,8 +288,6 @@ void OmniShadowMapPass(PointLight *light) {
 void RenderPass(glm::mat4 projectionMatrix, glm::mat4 viewMatrix) {
 
 
-
-
     glViewport(0, 0, 1920, 1080);
 
     // clear window
@@ -296,7 +304,6 @@ void RenderPass(glm::mat4 projectionMatrix, glm::mat4 viewMatrix) {
     uniformEyePosition = shaderList[0].getEyePositionLocation();
     uniformSpecularIntensity = shaderList[0].getSpecularIntensityLocation();
     uniformShininess = shaderList[0].getShininessLocation();
-
 
 
     glUniformMatrix4fv(uniformProjection, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
@@ -347,17 +354,24 @@ int main() {
 //    terraTexture.LoadTextureA();
 
 
-        monitor = Model();
-        monitor.loadModel("../assets/Models/Monitor/Monitor_1.fbx");
+    monitor = Model();
+    monitor.loadModel("../assets/Models/Monitor/MonitorTeste.obj");
 
-        monitorTexture = Texture((char*)"../assets/Texture/Monitor/Monitor_1_Emission.png");
-        monitorTexture.LoadTextureA();
+//    monitorTexture = Texture((char *) "../assets/Models/Monitor/Monitor_1.png");
+//    monitorTexture.LoadTextureA();
+//    monitorTexture = Texture((char *) "../assets/Models/Monitor/Monitor_1_Specular.png");
+//    monitorTexture.LoadTextureA();
+//    monitorTexture = Texture((char *) "../assets/Models/Monitor/Monitor_1_Normal.png");
+//    monitorTexture.LoadTextureA();
+
+    table = Model();
+    table.loadModel("../assets/Models/Table/table.obj");
 
 
 //     terraTexture.LoadTextureA();
 
     shinyMaterial = Material(10.0f, 256);
-    dullMaterial = Material(0.3f,1);
+    dullMaterial = Material(0.3f, 1);
 
     AddLights();
 

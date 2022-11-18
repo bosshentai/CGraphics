@@ -95,7 +95,7 @@ void Model::LoadMaterials(const aiScene* scene)
 {
     textureList.resize(scene->mNumMaterials);
 
-//    printf("LoadMaterials");
+    printf("LoadMaterials\n");
 
     for (size_t i = 0; i < scene->mNumMaterials; i++)
     {
@@ -106,13 +106,14 @@ void Model::LoadMaterials(const aiScene* scene)
         if (material->GetTextureCount(aiTextureType_DIFFUSE) > 0)
         {
             aiString path;
+            printf("patch data : %s \n" ,path.C_Str());
             if (material->GetTexture(aiTextureType_DIFFUSE, 0, &path) == AI_SUCCESS)
             {
-                int idx = std::string(path.data).rfind("\\");
+                int idx = std::string(path.data).rfind("/");
+
                 std::string filename = std::string(path.data).substr(idx + 1);
 
-                printf("patch data : %s" ,path.C_Str());
-//std::string filename
+
 
                 std::string texPath = std::string("../assets/Texture/") + filename;
                 printf("file name :  %s" , filename.c_str());
@@ -120,7 +121,7 @@ void Model::LoadMaterials(const aiScene* scene)
 
                 textureList[i] = new Texture(texPath.c_str());
 
-                if (textureList[i] != nullptr && !textureList[i]->loadTexture())
+                if (!textureList[i]->loadTexture())
                 {
                     printf("Failed to load texture at: %s\n", texPath.c_str());
 
@@ -132,8 +133,11 @@ void Model::LoadMaterials(const aiScene* scene)
 
         if (!textureList[i])
         {
+//            printf("patch data : %s" ,path.C_Str());
+printf("teste\n");
             textureList[i] = new Texture("../assets/Texture/plain.png");
-            textureList[i]->loadTexture();
+            printf("plain.png teste \n");
+            textureList[i]->LoadTextureA();
         }
     }
 }
