@@ -53,9 +53,10 @@ Texture monitorTexture;
 Material shinyMaterial;
 Material dullMaterial;
 
-Model terra;
-Model monitor;
 Model table;
+Model monitor;
+Model floorDX;
+Model chair;
 
 DirectionalLight mainLight;
 PointLight pointLights[MAX_POINT_LIGHTS];
@@ -141,12 +142,18 @@ void CreateObjects() {
 }
 
 void AddLights() {
+//    mainLight = DirectionalLight(2048, 2048,    //resolution
+//                                 1.0f, 0.53f, 0.3f, //color
+//                                 0.1f, 0.9f, //intensity 0.1 0.5
+//                                 -10.0f, -12.0f, -18.5f); //location
+
     mainLight = DirectionalLight(2048, 2048,    //resolution
-                                 1.0f, 0.53f, 0.3f, //color
-                                 0.1f, 0.9f, //intensity 0.1 0.5
+                                 1.0f, 1.0f, 1.0f, //color
+                                 0.1f, 0.5f, //intensity 0.1 0.5
                                  -10.0f, -12.0f, -18.5f); //location
 
-    pointLights[0] = PointLight(1024, 1024,       //width height needs to be square
+
+    pointLights[0] = PointLight(2024, 2024,       //width height needs to be square
                                 0.1f, 100.0f,     //near and far plane
                                 0.0f, 0.0f, 1.0f, //color
                                 0.4f, 0.4f,          // aIntensity dIntensity
@@ -205,37 +212,44 @@ void CreateShader() {
 void RenderScene() {
 
 
-//    glm::mat4 model = glm::mat4 (1.0f);
-//    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 
-//     terra
-//    model = glm::mat4(1.0);
-//    glm::mat4 modelTerra = glm::mat4(1.0f);
-//    modelTerra = glm::translate(modelTerra, glm::vec3(2.0f, -1.0f, -10.0f));
-//    modelTerra = glm::scale(modelTerra, glm::vec3(1.0f, 1.0f, 1.0f));
-//    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelTerra));
-//    terraTexture.useTexture();
-//    shinyMaterial.UseMaterial(uniformSpecularIntensity,uniformShininess);
-//    terra.renderModel();
+// table
+    glm::mat4 modelTable = glm::mat4(1.0);
+    modelTable = glm::translate(modelTable, glm::vec3(-2.0f, -4.75f, -20.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelTable));
+    dullMaterial.UseMaterial(uniformSpecularIntensity, uniformShininess);
+    table.renderModel();
+
+
 
     // monitor
     glm::mat4 modelMonitor = glm::mat4(1.0);
-    modelMonitor = glm::translate(modelMonitor, glm::vec3(5.0f, -1.0f, -1.0f));
-//    modelMonitor = glm::rotate(modelMonitor, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-    modelMonitor = glm::scale(modelMonitor, glm::vec3(1.0f, 1.0f, 1.0f));
+    modelMonitor = glm::translate(modelMonitor, glm::vec3(-2.0f, -3.68f, -20.2f));
+    modelMonitor = glm::rotate(modelMonitor, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+    modelMonitor = glm::scale(modelMonitor, glm::vec3(.2f, .2f, .2f));
     glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelMonitor));
 //    monitorTexture.useTexture();
     dullMaterial.UseMaterial(uniformSpecularIntensity, uniformShininess);
     monitor.renderModel();
 
-//table
-    glm::mat4 modeltable = glm::mat4(1.0);
-    modeltable = glm::translate(modeltable,glm::vec3(2.0f,-1.0f,-3.0f));
-//    modeltable = glm::scale(modeltable,glm::vec3(.0f,100.0f,10.00f));
-    glUniformMatrix4fv(uniformModel,1,GL_FALSE,glm::value_ptr(modeltable));
+//floor
+    glm::mat4 modelfloor = glm::mat4(1.0);
+    modelfloor = glm::translate(modelfloor, glm::vec3(-2.0f, -5.0f, -30.0f));
+    modelfloor = glm::scale(modelfloor, glm::vec3(10.0f, 0.2f, 10.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelfloor));
 //    shinyMaterial.UseMaterial(uniformSpecularIntensity,uniformShininess);
-    dullMaterial.UseMaterial(uniformSpecularIntensity,uniformShininess);
-    table.renderModel();
+    dullMaterial.UseMaterial(uniformSpecularIntensity, uniformShininess);
+    floorDX.renderModel();
+
+
+    // chair
+    glm::mat4 modelChair = glm:: mat4(1.0);
+    modelChair = glm::translate(modelChair, glm::vec3(-2.0f, -4.7f, -19.0f));
+    modelChair = glm::scale(modelChair, glm::vec3(0.0015f, 0.0015f, 0.0015f));
+    modelChair = glm::rotate(modelChair,glm::radians(-180.0f),glm::vec3(0.0f,1.0f,0.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelChair));
+    dullMaterial.UseMaterial(uniformSpecularIntensity, uniformShininess);
+    chair.renderModel();
 
 }
 
@@ -343,7 +357,7 @@ int main() {
     CreateObjects();
     CreateShader();
 
-    camera = Camera(glm::vec3(0.0f, 0.0f, 0.0f),
+    camera = Camera(glm::vec3(0.0f, 0.0f, 10.0f),
                     glm::vec3(0.0f, 1.0f, 0.0f),
                     -60.0f, 0.0f, 5.0f, 0.5f);
 
@@ -353,25 +367,29 @@ int main() {
 //    terraTexture = Texture("../assets/Texture/Diffuse_2K.png");
 //    terraTexture.LoadTextureA();
 
-
+    // monitor
     monitor = Model();
-    monitor.loadModel("../assets/Models/Monitor/MonitorTeste.obj");
+    monitor.loadModel("../assets/Models/MoniTest/Lowpoly_Notebook_2.obj");
+//    monitor.loadModel("../assets/Models/Monitor/MonitorTeste.obj");
 
-//    monitorTexture = Texture((char *) "../assets/Models/Monitor/Monitor_1.png");
-//    monitorTexture.LoadTextureA();
-//    monitorTexture = Texture((char *) "../assets/Models/Monitor/Monitor_1_Specular.png");
-//    monitorTexture.LoadTextureA();
-//    monitorTexture = Texture((char *) "../assets/Models/Monitor/Monitor_1_Normal.png");
-//    monitorTexture.LoadTextureA();
 
+    // table
     table = Model();
-    table.loadModel("../assets/Models/Table/table.obj");
+    table.loadModel("../assets/Models/Table/standing_desk.obj");
+
+    // floor
+    floorDX = Model();
+    floorDX.loadModel("../assets/Models/Floor/floor.obj");
+
+    // chair
+    chair = Model();
+    chair.loadModel("../assets/Models/Chair/Office_chair.obj");
 
 
 //     terraTexture.LoadTextureA();
 
-    shinyMaterial = Material(10.0f, 256);
-    dullMaterial = Material(0.3f, 1);
+    shinyMaterial = Material(10.0f, 50);
+    dullMaterial = Material(0.5f, 1);
 
     AddLights();
 
@@ -397,17 +415,7 @@ int main() {
         camera.mouseControl(mainWindow.getDeltaMouseX(), mainWindow.getDeltaMouseY());
 
 
-        // TESTES
 
-//        brickTexture = Texture("../assets/Texture/teste3.png");
-//        brickTexture.LoadTextureA();
-/*
-		if (mainWindow.getkeys()[GLFW_KEY_E])
-		{
-			spotLights[0].Tooggle();
-			mainWindow.getkeys()[GLFW_KEY_E] = false;
-		}
-*/
         DirectionalShadowMapPass(&mainLight);
         for (size_t i = 0; i < pointLightCount; i++) {
             OmniShadowMapPass(&pointLights[i]);

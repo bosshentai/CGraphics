@@ -1,0 +1,30 @@
+# Blender MTL File: 'standing_desk.blend'
+# Material Count: 2
+
+newmtl main_body
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+# map_Bump Desk\\Desk_main_body_Normal_GL.png
+map_Kd Desk_main_body_Color.png
+map_Ns Desk_main_body_Roughness.png
+# refl Desk_main_body_Metalness.png
+
+newmtl small_screen
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+# map_Bump Desk\\Desk_small_screen_Normal_GL.png
+map_Kd Desk_small_screen_Emissive.png
+map_Ns Desk_small_screen_Roughness.png
+# refl Desk_small_screen_Metalness.png
