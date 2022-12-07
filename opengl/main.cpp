@@ -57,6 +57,7 @@ Model table;
 Model monitor;
 Model floorDX;
 Model chair;
+Model wall;
 
 DirectionalLight mainLight;
 PointLight pointLights[MAX_POINT_LIGHTS];
@@ -142,35 +143,54 @@ void CreateObjects() {
 }
 
 void AddLights() {
-//    mainLight = DirectionalLight(2048, 2048,    //resolution
+//    mainLight = DirectionalLight(1024, 1024,    //resolution
 //                                 1.0f, 0.53f, 0.3f, //color
 //                                 0.1f, 0.9f, //intensity 0.1 0.5
 //                                 -10.0f, -12.0f, -18.5f); //location
 
     mainLight = DirectionalLight(2048, 2048,    //resolution
                                  1.0f, 1.0f, 1.0f, //color
-                                 0.1f, 0.5f, //intensity 0.1 0.5
-                                 -10.0f, -12.0f, -18.5f); //location
+                                 0.18f, 0.1f, //intensity 0.1 0.5
+                                 0.0f, 0.0f, -50.5f); //location
 
 
-    pointLights[0] = PointLight(2024, 2024,       //width height needs to be square
+
+    pointLights[0] = PointLight(1024, 1024,       //width height needs to be square
                                 0.1f, 100.0f,     //near and far plane
-                                0.0f, 0.0f, 1.0f, //color
-                                0.4f, 0.4f,          // aIntensity dIntensity
-                                2.0f, 2.0f, 2.0f, // x y z coords
-                                0.3f, 0.1f, 0.1f);//con lin exp
+                                1.0f, 1.0f, 1.0f, //color
+                                0.1f, 0.1f,          // aIntensity dIntensity
+                                0.0f, 0.0f, 0.0f, // x y z coords
+                                0.4f, 0.2f, 0.2f);//con lin exp
     pointLightCount++;
 
+//    pointLights[0] = PointLight(2048, 2048,       //width height needs to be square
+//                                0.1f, 100.0f,     //near and far plane
+//                                0.0f, 0.0f, 1.0f, //color
+//                                0.4f, 0.4f,          // aIntensity dIntensity
+//                                2.0f, 2.0f, 2.0f, // x y z coords
+//                                0.3f, 0.1f, 0.1f);//con lin exp
+//    pointLightCount++;
+
     spotLights[0] = SpotLight(1024, 1024,     //width height needs to be square
-                              0.1f, 100.0f,   //near and far plane
+                              0.1f, 50.0f,   //near and far plane
                               1.0f, 1.0f, 1.0f,
-                              0.0f, 2.0f, //brightness
+                              0.0f, 0.5f, //brightness
                               0.0f, 0.0f, 0.0f,
-                              0.0f, -1.0f, 0.0f,
+                              0.0f, 0.0f, 0.0f,
                               1.0f, 0.0f, 0.0f, //attenuation values
-                              20.0f); //angle of edge
+                              0.0f); //angle of edge
     spotLightCount++;
 
+//
+//    spotLights[0] = SpotLight(2048, 2048,     //width height needs to be square
+//                              0.1f, 100.0f,   //near and far plane
+//                              1.0f, 1.0f, 1.0f,
+//                              0.0f, 4.0f, //brightness
+//                              0.0f, 0.0f, 0.0f,
+//                              0.0f, -1.0f, 0.0f,
+//                              1.0f, 0.0f, 0.0f, //attenuation values
+//                              20.0f); //angle of edge
+//    spotLightCount++;
 
 }
 
@@ -214,32 +234,207 @@ void RenderScene() {
 
 
 // table
+    // primera fila
     glm::mat4 modelTable = glm::mat4(1.0);
-    modelTable = glm::translate(modelTable, glm::vec3(-2.0f, -4.75f, -20.0f));
+    modelTable = glm::translate(modelTable, glm::vec3(7.0f, -4.75f, -23.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelTable));
+    dullMaterial.UseMaterial(uniformSpecularIntensity, uniformShininess);
+    table.renderModel();
+
+    modelTable = glm::translate(modelTable, glm::vec3(-4.0f, 0.0f, -0.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelTable));
+    dullMaterial.UseMaterial(uniformSpecularIntensity, uniformShininess);
+    table.renderModel();
+
+    modelTable = glm::translate(modelTable, glm::vec3(-4.0f, 0.0f, -0.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelTable));
+    dullMaterial.UseMaterial(uniformSpecularIntensity, uniformShininess);
+    table.renderModel();
+
+    modelTable = glm::translate(modelTable, glm::vec3(-4.0f, 0.0f, -0.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelTable));
+    dullMaterial.UseMaterial(uniformSpecularIntensity, uniformShininess);
+    table.renderModel();
+
+    modelTable = glm::translate(modelTable, glm::vec3(-4.0f, 0.0f, -0.0f));
     glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelTable));
     dullMaterial.UseMaterial(uniformSpecularIntensity, uniformShininess);
     table.renderModel();
 
 
+    modelTable = glm::translate(modelTable, glm::vec3(-4.0f, 0.0f, -0.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelTable));
+    dullMaterial.UseMaterial(uniformSpecularIntensity, uniformShininess);
+    table.renderModel();
+
+
+    // segunda fila
+    modelTable = glm::translate(modelTable, glm::vec3(0.0f, 0.0f, -4.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelTable));
+    dullMaterial.UseMaterial(uniformSpecularIntensity, uniformShininess);
+    table.renderModel();
+
+    modelTable = glm::translate(modelTable, glm::vec3(4.0f, 0.0f, -0.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelTable));
+    dullMaterial.UseMaterial(uniformSpecularIntensity, uniformShininess);
+    table.renderModel();
+
+    modelTable = glm::translate(modelTable, glm::vec3(4.0f, 0.0f, -0.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelTable));
+    dullMaterial.UseMaterial(uniformSpecularIntensity, uniformShininess);
+    table.renderModel();
+
+    modelTable = glm::translate(modelTable, glm::vec3(4.0f, 0.0f, -0.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelTable));
+    dullMaterial.UseMaterial(uniformSpecularIntensity, uniformShininess);
+    table.renderModel();
+
+    modelTable = glm::translate(modelTable, glm::vec3(4.0f, 0.0f, -0.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelTable));
+    dullMaterial.UseMaterial(uniformSpecularIntensity, uniformShininess);
+    table.renderModel();
+
+    modelTable = glm::translate(modelTable, glm::vec3(4.0f, 0.0f, -0.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelTable));
+    dullMaterial.UseMaterial(uniformSpecularIntensity, uniformShininess);
+    table.renderModel();
+
+    // terceira fila
+    modelTable = glm::translate(modelTable, glm::vec3(0.0f, 0.0f, -4.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelTable));
+    dullMaterial.UseMaterial(uniformSpecularIntensity, uniformShininess);
+    table.renderModel();
+
+    modelTable = glm::translate(modelTable, glm::vec3(-4.0f, 0.0f, -0.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelTable));
+    dullMaterial.UseMaterial(uniformSpecularIntensity, uniformShininess);
+    table.renderModel();
+
+    modelTable = glm::translate(modelTable, glm::vec3(-4.0f, 0.0f, -0.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelTable));
+    dullMaterial.UseMaterial(uniformSpecularIntensity, uniformShininess);
+    table.renderModel();
+
+    modelTable = glm::translate(modelTable, glm::vec3(-4.0f, 0.0f, -0.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelTable));
+    dullMaterial.UseMaterial(uniformSpecularIntensity, uniformShininess);
+    table.renderModel();
+
+    modelTable = glm::translate(modelTable, glm::vec3(-4.0f, 0.0f, -0.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelTable));
+    dullMaterial.UseMaterial(uniformSpecularIntensity, uniformShininess);
+    table.renderModel();
+
+    modelTable = glm::translate(modelTable, glm::vec3(-4.0f, 0.0f, -0.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelTable));
+    dullMaterial.UseMaterial(uniformSpecularIntensity, uniformShininess);
+    table.renderModel();
+
+    // quarta fila
+
+    modelTable = glm::translate(modelTable, glm::vec3(-0.0f, 0.0f, -4.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelTable));
+    dullMaterial.UseMaterial(uniformSpecularIntensity, uniformShininess);
+    table.renderModel();
+
+    modelTable = glm::translate(modelTable, glm::vec3(4.0f, 0.0f, -0.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelTable));
+    dullMaterial.UseMaterial(uniformSpecularIntensity, uniformShininess);
+    table.renderModel();
 
     // monitor
     glm::mat4 modelMonitor = glm::mat4(1.0);
-    modelMonitor = glm::translate(modelMonitor, glm::vec3(-2.0f, -3.68f, -20.2f));
+    modelMonitor = glm::translate(modelMonitor, glm::vec3(7.0f, -3.68f, -23.2f));
     modelMonitor = glm::rotate(modelMonitor, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
     modelMonitor = glm::scale(modelMonitor, glm::vec3(.2f, .2f, .2f));
     glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelMonitor));
-//    monitorTexture.useTexture();
+
     dullMaterial.UseMaterial(uniformSpecularIntensity, uniformShininess);
     monitor.renderModel();
 
-//floor
-    glm::mat4 modelfloor = glm::mat4(1.0);
-    modelfloor = glm::translate(modelfloor, glm::vec3(-2.0f, -5.0f, -30.0f));
-    modelfloor = glm::scale(modelfloor, glm::vec3(10.0f, 0.2f, 10.0f));
-    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelfloor));
-//    shinyMaterial.UseMaterial(uniformSpecularIntensity,uniformShininess);
-    dullMaterial.UseMaterial(uniformSpecularIntensity, uniformShininess);
-    floorDX.renderModel();
+
+    modelMonitor = glm::translate(modelMonitor, glm::vec3(0.0f, 0.0f, -20.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelMonitor));
+    monitor.renderModel();
+
+    modelMonitor = glm::translate(modelMonitor, glm::vec3(0.0f, 0.0f, -20.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelMonitor));
+    monitor.renderModel();
+
+    modelMonitor = glm::translate(modelMonitor, glm::vec3(0.0f, 0.0f, -20.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelMonitor));
+    monitor.renderModel();
+
+    modelMonitor = glm::translate(modelMonitor, glm::vec3(0.0f, 0.0f, -20.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelMonitor));
+    monitor.renderModel();
+
+    modelMonitor = glm::translate(modelMonitor, glm::vec3(0.0f, 0.0f, -20.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelMonitor));
+    monitor.renderModel();
+
+    // segunda fila
+
+    modelMonitor = glm::translate(modelMonitor, glm::vec3(20.0f, 0.0f, 0.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelMonitor));
+    monitor.renderModel();
+
+    modelMonitor = glm::translate(modelMonitor, glm::vec3(0.0f, 0.0f, 20.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelMonitor));
+    monitor.renderModel();
+
+    modelMonitor = glm::translate(modelMonitor, glm::vec3(0.0f, 0.0f, 20.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelMonitor));
+    monitor.renderModel();
+
+
+    modelMonitor = glm::translate(modelMonitor, glm::vec3(0.0f, 0.0f, 20.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelMonitor));
+    monitor.renderModel();
+
+    modelMonitor = glm::translate(modelMonitor, glm::vec3(0.0f, 0.0f, 20.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelMonitor));
+    monitor.renderModel();
+
+    modelMonitor = glm::translate(modelMonitor, glm::vec3(0.0f, 0.0f, 20.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelMonitor));
+    monitor.renderModel();
+
+    // terceira fila
+
+    modelMonitor = glm::translate(modelMonitor, glm::vec3(20.0f, 0.0f, 0.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelMonitor));
+    monitor.renderModel();
+
+    modelMonitor = glm::translate(modelMonitor, glm::vec3(0.0f, 0.0f, -20.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelMonitor));
+    monitor.renderModel();
+
+    modelMonitor = glm::translate(modelMonitor, glm::vec3(0.0f, 0.0f, -20.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelMonitor));
+    monitor.renderModel();
+
+    modelMonitor = glm::translate(modelMonitor, glm::vec3(0.0f, 0.0f, -20.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelMonitor));
+    monitor.renderModel();
+
+    modelMonitor = glm::translate(modelMonitor, glm::vec3(0.0f, 0.0f, -20.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelMonitor));
+    monitor.renderModel();
+
+    modelMonitor = glm::translate(modelMonitor, glm::vec3(0.0f, 0.0f, -20.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelMonitor));
+    monitor.renderModel();
+
+    // quarta fila
+
+    modelMonitor = glm::translate(modelMonitor, glm::vec3(20.0f, 0.0f, 0.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelMonitor));
+    monitor.renderModel();
+
+    modelMonitor = glm::translate(modelMonitor, glm::vec3(0.0f, 0.0f, 20.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelMonitor));
+    monitor.renderModel();
 
 
     // chair
@@ -251,6 +446,49 @@ void RenderScene() {
     dullMaterial.UseMaterial(uniformSpecularIntensity, uniformShininess);
     chair.renderModel();
 
+
+
+
+//floor
+    glm::mat4 modelfloor = glm::mat4(1.0);
+    modelfloor = glm::translate(modelfloor, glm::vec3(-2.0f, -5.0f, -30.0f));
+    modelfloor = glm::scale(modelfloor, glm::vec3(10.0f, 0.2f, 10.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelfloor));
+//    shinyMaterial.UseMaterial(uniformSpecularIntensity,uniformShininess);
+    dullMaterial.UseMaterial(uniformSpecularIntensity, uniformShininess);
+    floorDX.renderModel();
+
+
+    // Wall
+
+    // left wall
+    glm::mat4 modelwall = glm::mat4 (1.0);
+    modelwall = glm::translate(modelwall,glm::vec3(18.5f,-2.3f,-30.0f));
+    modelwall = glm::scale(modelwall,glm::vec3(0.2f,0.3f,1.43f));
+    modelwall = glm::rotate(modelwall,glm::radians(90.0f),glm::vec3(1.0f,0.0f,0.0f));
+    modelwall = glm::rotate(modelwall,glm::radians(90.0f),glm::vec3(0.0f,0.0f,1.0f));
+    dullMaterial.UseMaterial(uniformSpecularIntensity,uniformShininess);
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelwall));
+    wall.renderModel();
+
+    // right wall
+    modelwall = glm::translate(modelwall,glm::vec3(0.0f,202.0f,0.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelwall));
+    wall.renderModel();
+
+    // bottom wall
+    modelwall = glm::translate(modelwall,glm::vec3(-9.0f,-100.0f,0.0f));
+    modelwall = glm::scale(modelwall,glm::vec3(0.2f,10.8f,1.0f));
+    modelwall = glm::rotate(modelwall,glm::radians(90.0f),glm::vec3(0.0f,0.0f,1.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelwall));
+    wall.renderModel();
+
+    // top wall
+    modelwall = glm::translate(modelwall,glm::vec3(0.0f,-44.0f,-10.0f));
+    modelwall = glm::scale(modelwall,glm::vec3(1.0f,5.6f,1.0f));
+    modelwall = glm::rotate(modelwall,glm::radians(90.0f),glm::vec3(1.0f,0.0f,0.0f));
+    glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(modelwall));
+    wall.renderModel();
 }
 
 void DirectionalShadowMapPass(DirectionalLight *light) {
@@ -384,6 +622,10 @@ int main() {
     // chair
     chair = Model();
     chair.loadModel("../assets/Models/Chair/Office_chair.obj");
+
+    // wall
+    wall = Model();
+    wall.loadModel("../assets/Models/Wall/wall.obj");
 
 
 //     terraTexture.LoadTextureA();
