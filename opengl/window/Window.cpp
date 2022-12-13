@@ -14,8 +14,7 @@ Window::Window()
     width = 800;
     height = 600;
 
-    for (size_t i = 0; i < 1024; i++)
-    {
+    for (size_t i = 0; i < 1024; i++) {
         keys[i] = 0;
     }
 
@@ -43,18 +42,14 @@ int Window::Initialise()
         glfwTerminate();
         return 1;
     }
-
     // Configurar propriedades de GLFW windows
     // Versao OpenGL
-
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     // Perfil principal  = Sem Compatiblidade com versoes anteriores
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
     // Permitir compatibilidade direta
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-
     mainWindow = glfwCreateWindow(width, height, "Test windows",nullptr, nullptr);
     if (!mainWindow)
     {
@@ -65,16 +60,11 @@ int Window::Initialise()
 
     // get  informacóes sobre o tamanho do buffer
     glfwGetFramebufferSize(mainWindow, &bufferWidth, &bufferHeight);
-
     // Set contexto atual
     glfwMakeContextCurrent(mainWindow);
-
 //    glfwSetInputMode(mainWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
-
     // manipular teclas do teclado + input do rato
     createCallbacks();
-
-
 
     //permitir recursos de exções modernas
     glewExperimental = GL_TRUE;
@@ -87,14 +77,10 @@ int Window::Initialise()
         glfwTerminate();
         return 1;
     }
-
     glEnable(GL_DEPTH_TEST);
-
     // configurar o tamanho da janela de visualização
     glViewport(0, 0, bufferWidth, bufferHeight);
-
     glfwSetWindowUserPointer(mainWindow, this);
-
     return 0;
 
 }
