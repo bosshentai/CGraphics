@@ -132,11 +132,11 @@ void CreateObjects() {
 //    Mesh *obj1 = new Mesh();
 //    obj1->createMesh(vertices, indices, 32, 12);
 //    meshList.push_back(obj1);
-////
+
 //    Mesh *obj2 = new Mesh();
 //    obj2->createMesh(vertices, indices, 32, 12);
 //    meshList.push_back(obj2);
-////
+
 //    Mesh *obj3 = new Mesh();
 //    obj3->createMesh(floorVertices, floorIndices, 32, 6);
 //    meshList.push_back(obj3);
@@ -150,7 +150,7 @@ void AddLights() {
 
     mainLight = DirectionalLight(2048, 2048,    //resolution
                                  1.0f, 1.0f, 1.0f, //color
-                                 0.18f, 0.1f, //intensity 0.1 0.5
+                                 0.5f, 0.1f, //intensity 0.1 0.5
                                  0.0f, 0.0f, -50.5f); //location
 
 
@@ -605,30 +605,30 @@ int main() {
 //    terraTexture = Texture("../assets/Texture/Diffuse_2K.png");
 //    terraTexture.LoadTextureA();
 
-    // monitor
+//     monitor
     monitor = Model();
     monitor.loadModel("../assets/Models/MoniTest/Lowpoly_Notebook_2.obj");
-//    monitor.loadModel("../assets/Models/Monitor/MonitorTeste.obj");
+    monitor.loadModel("../assets/Models/Monitor/MonitorTeste.obj");
 
 
-    // table
+//     table
     table = Model();
     table.loadModel("../assets/Models/Table/standing_desk.obj");
 
-    // floor
+//     floor
     floorDX = Model();
     floorDX.loadModel("../assets/Models/Floor/floor.obj");
 
-    // chair
+//     chair
     chair = Model();
     chair.loadModel("../assets/Models/Chair/Office_chair.obj");
 
-    // wall
+//     wall
     wall = Model();
     wall.loadModel("../assets/Models/Wall/wall.obj");
 
 
-//     terraTexture.LoadTextureA();
+     terraTexture.LoadTextureA();
 
     shinyMaterial = Material(10.0f, 50);
     dullMaterial = Material(0.5f, 1);
@@ -667,7 +667,7 @@ int main() {
         }
         RenderPass(projection, camera.calculateViewMatrix());
 
-        glUseProgram(0);
+//        glUseProgram(0);
 
         mainWindow.swapBuffers();
 

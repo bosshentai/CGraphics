@@ -25,9 +25,8 @@ Window::Window(GLint windowWidth, GLint windowHeight)
 {
     width = windowWidth;
     height = windowHeight;
-
-    for (size_t i = 0; i < 1024; i++)
-    {
+    // retirar as funcionalidades da teclado
+    for (size_t i = 0; i < 1024; i++) {
         keys[i] = false;
     }
 
@@ -43,7 +42,7 @@ int Window::Initialise()
         return 1;
     }
     // Configurar propriedades de GLFW windows
-    // Versao OpenGL
+    // Versão OpenGL
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     // Perfil principal  = Sem Compatiblidade com versoes anteriores
@@ -62,12 +61,15 @@ int Window::Initialise()
     glfwGetFramebufferSize(mainWindow, &bufferWidth, &bufferHeight);
     // Set contexto atual
     glfwMakeContextCurrent(mainWindow);
-//    glfwSetInputMode(mainWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+
+
+
     // manipular teclas do teclado + input do rato
     createCallbacks();
 
-    //permitir recursos de exções modernas
+    //permitir recursos de extensões modernas
     glewExperimental = GL_TRUE;
+
 
     GLenum error = glewInit();
     if (error != GLEW_OK)
@@ -87,6 +89,7 @@ int Window::Initialise()
 
 void Window::createCallbacks()
 {
+    // abilitar o teclado e rato
     glfwSetKeyCallback(mainWindow, handlekeys);
     glfwSetCursorPosCallback(mainWindow, handleMouse);
 
@@ -134,7 +137,7 @@ void Window::handlekeys(GLFWwindow* window, int key, int code, int action, int m
 
 
 void Window::handleMouse(GLFWwindow* window, double xPos, double yPos) {
-    // get the focused window
+    // get o foco da janela
 
     Window* theWindow = static_cast<Window*>(glfwGetWindowUserPointer(window));
 
