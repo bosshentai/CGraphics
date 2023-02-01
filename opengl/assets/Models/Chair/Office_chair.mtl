@@ -30,7 +30,8 @@ illum 7
 
 newmtl Материал.1
 Ka 1 1 1
-map_Ka 07.hdr
+# map_Ka 07.jpg
+map_Kd wp4862779.jpg
 Kd 1 1 1
 illum 7
 
